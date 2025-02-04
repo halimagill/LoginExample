@@ -1,0 +1,59 @@
+    <title>Sign In</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="/assets/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css
+    <link rel="stylesheet" href="css/style.css"> -->
+
+
+ 
+    <div class="main">
+
+        <!-- Sign in  Form -->
+        <section class="sign-in">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="/assets/images/signin-image.jpg" alt="sing up image"></figure>
+                        <input class="btn btn-link" (click)="goToCreateLogin()" value="Create Account" type="button" />                        
+                    </div>
+
+                    <div class="signin-form">
+                        <h2 class="form-title">Sign In</h2>
+                        <form method="POST" [formGroup]="loginForm" (ngSubmit)="login()" class="register-form" id="login-form">
+                            <fieldset>
+                            <div *ngIf="isInvalidLogin" class="alert alert-danger" role="alert">
+                                Username or password is incorrect
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input formControlName="email" type="text" name="email" id="email" placeholder="email"/>
+                            </div>
+                            <div *ngIf="email?.touched && email?.invalid" class="alert alert-danger">
+                                <div *ngIf="email?.errors?.['required']">Email is required</div>
+                                <div *ngIf="email?.errors?.['email']">Invalid email format</div>
+                            </div>
+                            <div class="form-group">                                
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input formControlName="password" type="password" name="password" id="password" placeholder="Password"/>
+                                <!-- <div class="resetPassword"><input class="btn btn-link" name="reset_password" id="reset_password" value="Forgot password?" (click)="resetPassword()" /></div> -->
+                            </div>
+                            <div *ngIf="password?.touched && password?.invalid" class="alert alert-danger">
+                                <div *ngIf="password?.errors?.['required']">Password is required</div>
+                            </div>
+                        </fieldset>
+                            <!-- <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div> -->
+                            <div class="form-group form-button">
+                                <input type="submit" [disabled]="loginForm.invalid" name="signin" id="signin" class="form-submit" value="Log in"/>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
