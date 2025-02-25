@@ -1,0 +1,16 @@
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\bin\Debug\net9.0\LoginExample.BSN.deps.json
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\bin\Debug\net9.0\LoginExample.BSN.dll
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\bin\Debug\net9.0\LoginExample.BSN.pdb
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\bin\Debug\net9.0\LoginExample.Data.dll
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\bin\Debug\net9.0\LoginExample.Data.pdb
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.csproj.AssemblyReference.cache
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.AssemblyInfoInputs.cache
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.AssemblyInfo.cs
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.csproj.CoreCompileInputs.cache
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.sourcelink.json
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExa.7364E1E7.Up2Date
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.dll
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\refint\LoginExample.BSN.dll
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\LoginExample.BSN.pdb
+C:\Users\Lima\source\repos\LoginExample\webAPI\LoginExample.API\LoginExample.Busniess\obj\Debug\net9.0\ref\LoginExample.BSN.dll
