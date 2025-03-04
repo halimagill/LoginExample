@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/webAPI/LoginExample.API/.vs
+/webAPI/LoginExample.API/LoginExample/bin/Debug/net9.0
+/webAPI/LoginExample.API/LoginExample/Logs
+/webAPI/LoginExample.API/LoginExample/obj

@@ -50,7 +50,7 @@ namespace LoginExample.Data
             //    optionsBuilder.UseSqlServer(_connectionString);
 
             //    var build = new ConfigurationBuilder();
-            //    build.SetBasePath(Directory.GetCurrentDirectory());  // 获取当前程序执行目录
+            //    build.SetBasePath(Directory.GetCurrentDirectory()); 
             //    build.AddJsonFile(CONFIG_FILE, true, true);
             //    Configs = build.Build();
 

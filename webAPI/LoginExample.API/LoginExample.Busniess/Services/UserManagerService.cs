@@ -41,6 +41,8 @@ namespace LoginExample.BSN.Services
             {
                 UserName = user.UserName,
                 Email = user.Email,
+                EmailConfirmed = true,
+                PhoneNumber = user.PhoneNo,
                 FirstName = user.FirstName,
                 LastName = user.LastName
             };

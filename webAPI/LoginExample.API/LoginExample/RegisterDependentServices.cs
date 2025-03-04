@@ -35,11 +35,15 @@ namespace LoginExample
                .Build();
 
                 var connectionString = Configuration.GetConnectionString("DefaultConnection");
+                string corsUrl = Configuration.GetValue<string>("CorsUrl");
                 services.AddDbContext<AppIdentityDbContext>(options =>
                     options.UseSqlServer(connectionString
                                         , x => x.MigrationsAssembly("LoginExample.Data.Migrations")));
                 services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
-
+                services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
+                {
+                    builder.WithOrigins(corsUrl).AllowAnyMethod().AllowAnyHeader();
+                }));
                 // Add services to the container.
                 //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 //    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
