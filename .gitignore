@@ -42,3 +42,7 @@
 /webAPI/LoginExample.API/LoginExample.Data/.vs/ProjectEvaluation/loginexample.data.metadata.v9.bin
 /webAPI/LoginExample.API/LoginExample.Data/.vs/ProjectEvaluation/loginexample.data.projects.v9.bin
 /webAPI/LoginExample.API/LoginExample.Data/.vs/ProjectEvaluation/loginexample.data.strings.v9.bin
+/webAPI/LoginExample.API/LoginExample.Busniess/obj/Debug/net9.0
+/webAPI/LoginExample.API/LoginExample.Busniess/obj/Debug/net9.0/.NETCoreApp,Version=v9.0.AssemblyAttributes.cs
+/webAPI/LoginExample.API/LoginExample.Busniess/obj/Debug/net9.0/LoginExample.BSN.GeneratedMSBuildEditorConfig.editorconfig
+/webAPI/LoginExample.API/LoginExample.Busniess/obj/Debug/net9.0/LoginExample.BSN.GlobalUsings.g.cs
