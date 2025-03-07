@@ -4,7 +4,6 @@ using Lamar.Microsoft.DependencyInjection;
 using LoginExample;
 using LoginExample.Data;
 using LoginExample.Data.Models;
-using LoginExample.Helpers;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -15,8 +14,8 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseLamar()
-    .RegisterServices()
+builder.Host.UseLamar()    
+    .RegisterServices()    
     .UseSerilog((hostingContext, services, loggerConfiguration) => loggerConfiguration
                     .ReadFrom.Configuration(hostingContext.Configuration));
 

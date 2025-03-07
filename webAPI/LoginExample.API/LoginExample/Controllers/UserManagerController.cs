@@ -3,6 +3,7 @@ using LoginExample.BSN.Interfaces;
 using LoginExample.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static FastExpressionCompiler.ExpressionCompiler;
 
 // TODO: SETUP the Logger, Login, Logout, install cert on in store
 
@@ -12,17 +13,20 @@ namespace LoginExample.API.Controllers
     [ApiController]
     public class UserManagerController : ControllerBase
     {
+        private IAuthService _authService;
         private IUserManagerService _userManagerService;
-        public UserManagerController(IUserManagerService usrMgr)
+        public UserManagerController(IAuthService authService, IUserManagerService usrMgr)
         {
+            _authService = authService;
             _userManagerService = usrMgr;
         }
 
         // GET: api/<UserManagerController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("Users")]
+        public async Task<IEnumerable<User>?> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await _userManagerService.GetUsers();
         }
 
         // GET api/<UserManagerController>/5
@@ -50,16 +54,61 @@ namespace LoginExample.API.Controllers
             return CreatedAtAction(nameof(CreateUser), result.Succeeded);
         }
 
+        [HttpPost]
+        [Route("Login")]
+        public async Task<ActionResult<string>> Login(string email, string password)
+        {
+            try
+            {
+                var token = await _authService.Login(email, password);
+
+                if (token != null)
+                {
+                    return Ok(token);
+                }
+
+                return BadRequest("Login was unsuccessful!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }            
+        }
+
+        [HttpPost]
+        [Route("Logout")]
+        public async Task<ActionResult> Logout(User user)
+        {
+            //TODO: Build out further and add session handling
+            //Remove the token
+            _authService.LogOut();
+
+            return Ok();
+        }
+
         // PUT api/<UserManagerController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<User>> Put(Guid id, [FromBody] User user)
         {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+            
+            var updatedUser = await _userManagerService.UpdateUser(user);
+
+            if (updatedUser is null) 
+            { 
+                return NotFound();
+            }
+
+            return Ok(updatedUser);
         }
 
         // DELETE api/<UserManagerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //[HttpDelete("{id}")]
+        //public void Delete(int id)
+        //{
+        //}
     }
 }

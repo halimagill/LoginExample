@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Text;
 using Lamar;
+using LoginExample.BSN.Interfaces;
+using LoginExample.BSN.Services;
 using LoginExample.Data;
 using LoginExample.Data.Models;
-using LoginExample.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,16 @@ namespace LoginExample
                 services.AddDbContext<AppIdentityDbContext>(options =>
                     options.UseSqlServer(connectionString
                                         , x => x.MigrationsAssembly("LoginExample.Data.Migrations")));
-                services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
+                services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders()
+                .AddSignInManager<SignInManager<AppUser>>();
+
+                services.Configure<IdentityOptions>(options =>
+                {
+                    configuration.GetSection("Identity:Options").Bind(options);
+                });
+                
                 services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
                 {
                     builder.WithOrigins(corsUrl).AllowAnyMethod().AllowAnyHeader();
@@ -55,9 +65,14 @@ namespace LoginExample
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(AuthSettings.PrivateKey)),
-                        ValidateIssuer = false, //probably should check into this
-                        ValidateAudience = false,
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Secret"])),
+                        ValidIssuer = Configuration["Jwt:Issuer"],
+                        ValidAudience = Configuration["Jwt:Audience"],
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
 
@@ -69,7 +84,7 @@ namespace LoginExample
                     var securityScheme = new OpenApiSecurityScheme
                     {
                         Name = "JWT Authentication",
-                        Description = "Enter your JWT token in this field",
+                        Description = Configuration["Jwt:Secret"],
                         In = ParameterLocation.Header,
                         Type = SecuritySchemeType.Http,
                         Scheme = "bearer",
@@ -99,8 +114,21 @@ namespace LoginExample
                 services.For<AppIdentityDbContext>().Use(x => new AppIdentityDbContext(connectionString));
                 services.For<IAppIdentityDbContext>().Use(x => x.GetInstance<AppIdentityDbContext>());
                 services.For<IUnitOfWork<IAppIdentityDbContext>>().Use<UnitOfWork>().Scoped();
+                services.For<IUserManagerService>().Use(x => 
+                {
+                    var userMrg = x.GetInstance<UserManager<AppUser>>();
+                    var uow = x.GetInstance<IUnitOfWork<IAppIdentityDbContext>>();
+                    return new UserManagerService(userMrg, uow);
+                });
+                services.For<IAuthService>().Use(x =>
+                {
+                    string privateKey = Configuration["Jwt:Secret"].ToString();
+                    var signInMrg = x.GetInstance<SignInManager<AppUser>>();
+                    var userManagerService = x.GetInstance<IUserManagerService>();
 
-            });
+                    return new AuthService(privateKey, signInMrg, userManagerService);
+                 });
+        });
 
 
             return builder;

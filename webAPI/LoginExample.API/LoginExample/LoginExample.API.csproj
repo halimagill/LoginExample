@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.12" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.Identity.Web" Version="3.2.0" />
     <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.2.0" />
     <PackageReference Include="Serilog" Version="4.2.0" />
@@ -24,6 +25,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LoginExample.Busniess\LoginExample.BSN.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
 </Project>

@@ -11,6 +11,9 @@ namespace LoginExample.BSN.Interfaces
     public  interface IUserManagerService
     {
         Task<IdentityResult> CreateUser(User user);
+        Task<IEnumerable<User>?> GetUsers();
         Task<AppUser?> FindUserByEmail(string email);
+        Task<User?> UpdateUser(User user);
+        Task<bool> VerifyPassword(AppUser user, string password);
     }
 }
