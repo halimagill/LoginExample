@@ -33,6 +33,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+// Converts unhandled exceptions into Problem Details responses
+app.UseExceptionHandler();
+
+// Returns the Problem Details response for (empty) non-successful responses
+app.UseStatusCodePages();
 
 app.MapControllers();
 

@@ -56,22 +56,30 @@ namespace LoginExample.API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<ActionResult<string>> Login(string email, string password)
+        public async Task<ActionResult<string>> Login([FromBody] LoginRequest loginRequest)
         {
             try
             {
-                var token = await _authService.Login(email, password);
+                var token = await _authService.Login(loginRequest.email, loginRequest.password);
 
                 if (token != null)
                 {
-                    return Ok(token);
+                    return Ok(new { token });
                 }
 
-                return BadRequest("Login was unsuccessful!");
+                return Problem(
+                    type: "Bad Request",
+                    title: "Login was unsuccessful",
+                    detail: token,
+                    statusCode: StatusCodes.Status400BadRequest);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return Problem(
+                    type: "Bad Request",
+                    title: "Identity failure",
+                    detail: ex.Message,
+                    statusCode: StatusCodes.Status400BadRequest);
             }            
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Lamar;
+using LoginExample.API.ExceptionHandler;
 using LoginExample.BSN.Interfaces;
 using LoginExample.BSN.Services;
 using LoginExample.Data;
@@ -36,7 +37,7 @@ namespace LoginExample
                .Build();
 
                 var connectionString = Configuration.GetConnectionString("DefaultConnection");
-                string corsUrl = Configuration.GetValue<string>("CorsUrl");
+                string corsUrl = Configuration.GetValue<string>("CorsUrl") ?? string.Empty;
                 services.AddDbContext<AppIdentityDbContext>(options =>
                     options.UseSqlServer(connectionString
                                         , x => x.MigrationsAssembly("LoginExample.Data.Migrations")));
@@ -49,7 +50,10 @@ namespace LoginExample
                 {
                     configuration.GetSection("Identity:Options").Bind(options);
                 });
-                
+
+                services.AddProblemDetails();
+                services.AddExceptionHandler<CustomExceptionHandler>();
+
                 services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder =>
                 {
                     builder.WithOrigins(corsUrl).AllowAnyMethod().AllowAnyHeader();
